@@ -27,6 +27,30 @@ class Tree {
 
   insert(value) {
     // insert given value
+    const node = this.root
+    if (this.root === null) {
+        this.root = new Node(value)
+        return;
+    } else {
+        const searchTree = function(node) {
+            if (value < node.data) {
+                if (node.left === null) {
+                    node.left = new Node(value)
+                } else if (node.left != null) {
+                    return searchTree(node.left)
+                }
+            } else if (value > node.data) {
+                if (node.right === null) {
+                    node.right = new Node(value)
+                } else if (node.right != null) {
+                    return searchTree(node.right)
+                }
+            } else {
+                return null
+            }
+        }
+        return searchTree(node);
+    }
   }
 
   deleteItem(value) {
@@ -87,4 +111,9 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 const testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = new Tree(testArray);
 prettyPrint(tree.root);
-console.dir(tree, { depth: null });
+// console.dir(tree, { depth: null });
+console.log(tree.insert(20))
+console.log(tree.insert(9))
+console.log(tree.insert(100))
+console.log(tree.insert(6))
+prettyPrint(tree.root);
