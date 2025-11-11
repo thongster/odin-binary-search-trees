@@ -8,7 +8,8 @@ class Node {
 
 class Tree {
   constructor(array) {
-    this.root = this.buildTree(array);
+    const sortArray = [...new Set(array)].sort((a, b) => a - b)
+    this.root = this.buildTree(sortArray);
   }
 
   buildTree(array) {
@@ -83,9 +84,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-
-
-const testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-const tree = new Tree(testArray).buildTree(testArray);
-prettyPrint(tree)
-// console.dir(tree, { depth: null });
+const testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+const tree = new Tree(testArray);
+prettyPrint(tree.root);
+console.dir(tree, { depth: null });
