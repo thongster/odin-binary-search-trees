@@ -160,22 +160,41 @@ class Tree {
     callback(node);
   }
 
-  height(value) {
+  height(node) {
     // return height of node containing the given value
     // return null if value not found
+    if (node === null) {
+        return -1
+    }
+    const left = this.height(node.left)
+    const right = this.height(node.right)
+    return 1 + Math.max(left, right)
   }
 
-  depth(value) {
-    // return depth of node containing the given value
-    // return null if value not found
+  depth(value, node = this.root, currentDepth = 0) {
+    if (node === null) return null
+    if (node.data === value) return currentDepth
+    // keep going left/right and add current depth until node.data === value
+    if (value < node.data) return this.depth(value, node.left, currentDepth + 1) 
+    return this.depth(value, node.right, currentDepth + 1)
   }
 
-  isBalanced() {
+  isBalanced(node) {
     // check if tree is balanced
+    const leftHeight = this.height(this.root.left)
+    const rightHeight = this.height(this.root.right)
+
+    // if left is larger or less than right by 1 or less, return true
+    if (Math.abs(leftHeight - rightHeight) <= 1) return true
+    // if not, return false
+    return false
   }
 
   rebalance() {
     // rebalance an unbalanced tree
+    const nodes = []
+    this.inOrderForEach((node) => nodes.push(node.data))
+    this.root = this.buildTree(nodes)
   }
 }
 
@@ -210,4 +229,11 @@ console.log(tree.levelOrderForEach(node => console.log(node.data)))
 console.log(tree.inOrderForEach(node => console.log(node.data)))
 console.log(tree.preOrderForEach(node => console.log(node.data)))
 console.log(tree.postOrderForEach(node => console.log(node.data)))
+console.log(tree.height(tree.find(8)))
+console.log(`depth is: ${tree.depth(324)}`)
+prettyPrint(tree.root);
+console.log(tree.isBalanced())
+console.log(tree.rebalance())
+prettyPrint(tree.root);
+
 
