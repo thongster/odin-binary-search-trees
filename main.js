@@ -1,8 +1,8 @@
 class Node {
-  constructor(array, left = null, right = null) {
-    this.array = array;
-    this.left = left;
-    this.right = right;
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
   }
 }
 
@@ -12,7 +12,17 @@ class Tree {
   }
 
   buildTree(array) {
-    return; // level 0 root node
+    if (array.length === 0) return null; // if array is empty, return null
+    if (array[0] > array[array.length - 1]) return null;
+
+    const mid = Math.floor(array.length / 2);
+    console.log(mid);
+    const root = new Node(array[mid]);
+
+    root.left = this.buildTree(array.slice(0, mid));
+    root.right = this.buildTree(array.slice(mid + 1));
+
+    return root; // level 0 root node
   }
 
   insert(value) {
@@ -60,3 +70,7 @@ class Tree {
     // rebalance an unbalanced tree
   }
 }
+
+const testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const tree = new Tree(testArray).buildTree(testArray);
+console.dir(tree, { depth: null });
