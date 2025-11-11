@@ -15,12 +15,11 @@ class Tree {
     if (array.length === 0) return null; // if array is empty, return null
     if (array[0] > array[array.length - 1]) return null;
 
-    const mid = Math.floor(array.length / 2);
-    console.log(mid);
-    const root = new Node(array[mid]);
+    const mid = Math.floor(array.length / 2); // establish middle
+    const root = new Node(array[mid]); // use middle data to create new node
 
-    root.left = this.buildTree(array.slice(0, mid));
-    root.right = this.buildTree(array.slice(mid + 1));
+    root.left = this.buildTree(array.slice(0, mid)); // recursive call, create left node if exists
+    root.right = this.buildTree(array.slice(mid + 1)); // recursive call, create right node if exists
 
     return root; // level 0 root node
   }
@@ -71,6 +70,22 @@ class Tree {
   }
 }
 
+const prettyPrint = (node, prefix = '', isLeft = true) => {
+  if (node === null) {
+    return;
+  }
+  if (node.right !== null) {
+    prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+  }
+  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+  if (node.left !== null) {
+    prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+  }
+};
+
+
+
 const testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const tree = new Tree(testArray).buildTree(testArray);
-console.dir(tree, { depth: null });
+prettyPrint(tree)
+// console.dir(tree, { depth: null });
