@@ -1,13 +1,13 @@
-import js from "@eslint/js";
-import globals from "globals";
-import pluginPrettier from "eslint-plugin-prettier";
-import { defineConfig } from "eslint/config";
+import js from '@eslint/js';
+import globals from 'globals';
+import pluginPrettier from 'eslint-plugin-prettier';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   {
-    files: ["**/*.{js,mjs,cjs}"],
+    files: ['**/*.{js,mjs,cjs}'],
     languageOptions: {
-      sourceType: "module",
+      sourceType: 'module',
       globals: globals.node,
     },
     plugins: {
@@ -16,10 +16,10 @@ export default defineConfig([
     extends: [js.configs.recommended],
     rules: {
       // Enable Prettier inside ESLint
-      "prettier/prettier": "error",
+      'prettier/prettier': 'error',
       // Optional extra style rules
-      "no-unused-vars": "warn",
-      "no-console": "off",
+      'no-unused-vars': 'warn',
+      'no-console': 'off',
     },
   },
 ]);

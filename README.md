@@ -1,10 +1,11 @@
 # odin-binary-search-trees
+
 Project: Binary Search Trees from The Odin Project's Javascript Course
 
-Continuing the computer science lessons, in this assignment we are asked to created a balanced binary search tree. 
+Continuing the computer science lessons, in this assignment we are asked to created a balanced binary search tree.
 
 The requirements are as follows:
-    Build a Node class/factory. It should have an attribute for the data it stores as well as its left and right children.
+Build a Node class/factory. It should have an attribute for the data it stores as well as its left and right children.
 
     Build a Tree class/factory which accepts an array when initialized. The Tree class should have a root attribute, which uses the return value of buildTree which you’ll write next.
 
