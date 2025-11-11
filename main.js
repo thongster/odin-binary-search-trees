@@ -114,19 +114,51 @@ class Tree {
   }
 
   levelOrderForEach(callback) {
-    // Write a levelOrderForEach(callback) function that accepts a callback function as its parameter.
-    // levelOrderForEach should traverse the tree in breadth-first level order and
-    // call the callback on each node as it traverses,
-    // passing the whole node as an argument, similarly to how Array.prototype.forEach might work for arrays.
-    // levelOrderForEach may be implemented using either iteration or recursion (try implementing both!).
-    // If no callback function is provided, throw an Error reporting that a callback is required.
+    if (!callback) {
+        throw new Error('Callback is required!')
+    }
+    
+    const queue = [this.root];
+    while (queue.length > 0) {
+        const current = queue.shift()
+        callback(current)
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+    }
   }
 
-  inOrderForEach(callback) {}
+  inOrderForEach(callback, node = this.root) {
+    if (!callback) {
+        throw new Error('Callback is required!')
+    }    
+    if (node === null) return;
+    this.inOrderForEach(callback, node.left);
+    callback(node);
+    this.inOrderForEach(callback, node.right);  
+  }
 
-  preOrderForEach(callback) {}
 
-  postOrderForEach(callback) {}
+  preOrderForEach(callback, node = this.root) {
+    if (!callback) {
+        throw new Error('Callback is required!')
+    }    
+    if (node === null) return;
+    
+    callback(node);
+    this.preOrderForEach(callback, node.left);
+    this.preOrderForEach(callback, node.right);  
+  }
+
+  postOrderForEach(callback, node = this.root) {
+    if (!callback) {
+        throw new Error('Callback is required!')
+    }    
+    if (node === null) return;
+    
+    this.postOrderForEach(callback, node.left);
+    this.postOrderForEach(callback, node.right);  
+    callback(node);
+  }
 
   height(value) {
     // return height of node containing the given value
@@ -174,4 +206,8 @@ console.log(tree.deleteItem(100))
 prettyPrint(tree.root);
 console.log(tree.find(23))
 console.log(tree.find(324))
+console.log(tree.levelOrderForEach(node => console.log(node.data)))
+console.log(tree.inOrderForEach(node => console.log(node.data)))
+console.log(tree.preOrderForEach(node => console.log(node.data)))
+console.log(tree.postOrderForEach(node => console.log(node.data)))
 
