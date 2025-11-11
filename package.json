@@ -1,0 +1,26 @@
+{
+  "name": "odin-binary-search-trees",
+  "version": "1.0.0",
+  "description": "Project: Binary Search Trees from The Odin Project's Javascript Course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thongster/odin-binary-search-trees.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thongster/odin-binary-search-trees/issues"
+  },
+  "homepage": "https://github.com/thongster/odin-binary-search-trees#readme",
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2"
+  }
+}
