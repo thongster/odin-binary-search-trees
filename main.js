@@ -55,10 +55,62 @@ class Tree {
 
   deleteItem(value) {
     // delete given value
+    const removeNode = function(node, value) {
+        if (node === null) {
+            return null
+        }
+        if (value === node.data) {
+            // no children
+            if (node.left === null && node.right === null) {
+                return null
+            }
+            // no left child
+            if (node.left === null) {
+                return node.right
+            }
+            // no right child
+            if (node.right === null) {
+                return node.left
+            }
+
+            // if two chicldren (last option)
+            // go down the right side, then keep going left til null
+            let tempNode = node.right
+            while (node.left != null) {
+                tempNode = node.left
+            }
+            // replacing the node to remove, with the next appropriate node
+            node.data = tempNode.data
+            node.right = removeNode(node.right, tempNode.data)
+            return node
+        } else if (value < node.data) {
+            node.left = removeNode(node.left, value)
+            return node
+        } else if (value > node.data) {
+            node.right = removeNode(node.right, value)
+            return node
+        }
+    }
+    this.root = removeNode(this.root, value)
   }
 
   find(value) {
     // return node with given value
+    let currentNode = this.root
+    while (value != currentNode.data) {
+        // if current node is greater than, keep moving left
+        if (value < currentNode.data) {
+            currentNode = currentNode.left
+        // if current node is less than, keep moving right
+        } else if (value > currentNode.data) {
+            currentNode = currentNode.right
+        }
+        // if null, return null
+        if (currentNode === null) {
+            return null
+        }
+    }
+    return currentNode
   }
 
   levelOrderForEach(callback) {
@@ -117,3 +169,9 @@ console.log(tree.insert(9))
 console.log(tree.insert(100))
 console.log(tree.insert(6))
 prettyPrint(tree.root);
+console.log(tree.deleteItem(20))
+console.log(tree.deleteItem(100))
+prettyPrint(tree.root);
+console.log(tree.find(23))
+console.log(tree.find(324))
+
